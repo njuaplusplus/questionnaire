@@ -1,0 +1,57 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>登录</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Tell Baido not to tranform the website -->
+    <meta http-equiv="Cache-Control" content="no-transform " />
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    {% block headBlock %}
+    {% endblock %}
+    <!-- Custom CSS -->
+    <link href="{% static 'shaoyaheng/css/cover.css' %}" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="{% static 'js/html5shiv.min.js' %}"></script>
+        <script src="{% static 'js/respond.min.js' %}"></script>
+    <![endif]-->
+
+    </head>
+    <body>
+        <div class="site-wrapper">
+            <div class="site-wrapper-inner">
+                <div class="cover-container">
+                    <div class="inner cover">
+                        {% if page %}
+                            {% if page.page_type == 'I' %}
+                                {{ page.content|safe }}
+                                <p class="lead">
+                                <a href="../{{ page.next_page }}" class="btn btn-lg btn-default" id="nextButton">下一步</a>
+                                </p>
+                            {% else %}
+                                <form method="POST" action="../{{page.next_page}}">
+                                    {{ page.content|safe }}
+                                </form>
+                            {% endif %}
+                        {% else %}
+                            <p class="lead">
+                            出错了, 请与管理员联系
+                            </p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="{% static 'jQuery/jQuery-2.1.4.min.js' %}"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    </body>
+</html>
